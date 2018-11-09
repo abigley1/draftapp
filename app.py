@@ -375,7 +375,7 @@ def create_nba_stats_table(similar, nba_stats):
 stats = pd.read_csv('data/app_data.csv')
 stats= stats.set_index(['PlayerName', 'Full Year'])
 
-nba_stats = pd.read_csv('data/app_data.csv')
+nba_stats = pd.read_csv('data/nba_stats.csv')
 nba_stats = nba_stats.set_index(['DISPLAY_FIRST_LAST', 'GROUP_VALUE'])
 cols = [ 'AST', 'BLK', 'DRAFT_ROUND', 'DRAFT_NUMBER', 'DREB', 'OREB', 'EFG_PCT', 'FG3A', 'FG3_PCT',
         'FGA_PG', 'FT_PCT', 'FTA', 'DRAFT_YEAR', 'NET_RATING', 'PLUS_MINUS', 'SEASON_EXP',
