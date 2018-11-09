@@ -552,10 +552,10 @@ app.layout= html.Div(
                 html.Div(
                         [
                            html_similar], id='similar'),
-                html.Div(
-                        [
-                                table
-                                ], id='similar_table')
+                #html.Div(
+                 #       [
+                  #              table
+                   #             ], id='similar_table')
                             
                 
                                     
@@ -782,13 +782,13 @@ def update_similar(player):
     sim = create_similar(player)
     return sim
     
-@app.callback(
-        dash.dependencies.Output('similar_table', 'children'),
-        [dash.dependencies.Input('player dropdown', 'value')])
-def update_sim_table(player):
-    sim = get_similar_players(stats_for_surv, player)
-    table = create_nba_stats_table(sim, nba_stats)
-    return table
+#@app.callback(
+ #       dash.dependencies.Output('similar_table', 'children'),
+  #      [dash.dependencies.Input('player dropdown', 'value')])
+#def update_sim_table(player):
+ #   sim = get_similar_players(stats_for_surv, player)
+  #  table = create_nba_stats_table(sim, nba_stats)
+   # return table
 
 
 
