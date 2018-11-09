@@ -254,9 +254,7 @@ def get_years(data):
 def create_summary(player):
     summ = get_player_sum(stats_for_summary, player)
     encoded_image = get_photo(player)
-    
-    #image_filename = '/home/bigley/Desktop/springboard/Basketball_Project/img_files/weemsso01.jpg' # replace with your own image
-    #encoded_image = base64.b64encode(open(image_filename, 'rb').read())
+   
     HTML = html.Div([
                                     html.Img(src='data:image/jpg;base64,{}'.format(encoded_image.decode())
                                             , style={ 'display':'block','width':'35%', 'margin-left':'auto','margin-right':'auto','margin-top':'4%' }),
@@ -338,7 +336,7 @@ def get_photo(player):
     first =low[0][0:2]
     print(first, last)
     name =  last+first+'01.jpg'
-    image_filename = '/home/bigley/Desktop/springboard/Basketball_Project/img_files/'
+    image_filename = '/draftapp/img_files/'
     url = image_filename +name
     encoded_image = base64.b64encode(open(url, 'rb').read())
     return encoded_image
