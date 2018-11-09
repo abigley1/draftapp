@@ -30,7 +30,8 @@ import numpy as np
 from sklearn.neighbors import NearestNeighbors
 import base64
 import dash_table
-
+from flask import Flask
+from flask_cors import CORS
 
 def make_tsne(data, inital_player):
     tsne = t_sne.TSNE(n_components = 2, learning_rate = 750)
@@ -433,6 +434,8 @@ kn.fit(scaled)
 
 
 app = dash.Dash(__name__, assets_external_path='https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css')
+server = app.server
+CORS(server)
 
 app.scripts.config.serve_locally = True
 app.css.config.serve_locally = False
@@ -801,7 +804,7 @@ def update_similar(player):
     
     
 if __name__ == '__main__':
-    app.run_server()
+    app.server.run(debug=True, threaded=True)
 
 
 
