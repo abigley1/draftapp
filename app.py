@@ -454,7 +454,7 @@ colValues =['MIN', 'FGM', 'FGA', 'FG%', '3PM', '3PA']
 
 
 
-table = create_nba_stats_table(similar[0:6], nba_stats)
+#table = create_nba_stats_table(similar[0:6], nba_stats)
 
 
 
