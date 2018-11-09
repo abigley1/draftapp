@@ -18,7 +18,6 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
-import matplotlib.pyplot as plt
 import nba_py 
 #from nba_py import player
 import plotly.plotly as py
