@@ -336,7 +336,7 @@ def get_photo(player):
     first =low[0][0:2]
     print(first, last)
     name =  last+first+'01.jpg'
-    image_filename = '/draftapp/img_files/'
+    image_filename = '/img_files/'
     url = image_filename +name
     encoded_image = base64.b64encode(open(url, 'rb').read())
     return encoded_image
