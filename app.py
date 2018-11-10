@@ -15,7 +15,6 @@ Created on Mon Nov  5 13:29:17 2018
 """
 
 import dash
-import xlrd
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
