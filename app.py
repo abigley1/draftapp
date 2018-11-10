@@ -247,7 +247,7 @@ def get_similar_players(data, player): #must remove active column from dataset i
     
     kn.fit(scaled)#.rank(pct=True))
     
-    x = kn.kneighbors(scaled_player, 10)
+    x = kn.kneighbors(scaled_player, 5)
     return(data.iloc[x[1][0]].index.values)
     
 def get_players(data, year):
@@ -302,7 +302,7 @@ def create_summary(player):
     return HTML
 
 def create_similar(player):
-     similar = get_similar_players(stats_for_surv, player)
+     similar = get_similar_players(stats_for_similar, player)
      links = get_links(similar)
      
      HTML = html.Div([   
