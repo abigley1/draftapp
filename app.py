@@ -213,7 +213,7 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
           "xaxis": {"title": "Years in the NBA", }, 
           "yaxis": {"title": "Likelyhood"},
           'margin': {'t':25, 'r':25},
-          'annotations':[{'x':13, 'y':0.7, 'text':string, 'showarrow':False, 'font':{'size':14}}],
+          'annotations':[{'x':13, 'y':0.78, 'text':string, 'showarrow':False, 'font':{'size':14}}],
           'legend':{'x':.8, 'y':1, 'traceorder':'normal'} })
     
     fig = go.Figure(data=data, layout=layout)
@@ -637,7 +637,7 @@ def get_surv_curv(player):
           "xaxis": {"title": "Years in the NBA", }, 
           "yaxis": {"title": "Likelyhood"},
            'margin': {'t':25, 'r':0},
-          'annotations':[{'x':13, 'y':0.7, 'text':string, 'showarrow':False, 'font':{'size':14}}],
+          'annotations':[{'x':13, 'y':0.78, 'text':string, 'showarrow':False, 'font':{'size':14}}],
           'legend':{'x':.8, 'y':1, 'traceorder':'normal'}
            
              })
