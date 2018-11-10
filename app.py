@@ -323,8 +323,11 @@ def create_similar(player):
 def get_links(similar_players):
     lis = list()
     link = 'https://basketball.realgm.com'
+    stats_for_links = stats_for_summary.copy()
+    stats_for_links.index=stats_for_links.index.str.replace('.', '')
+    stats_for_links.index=stats_for_links.index.str.replace("'", '')
     for name in similar_players:
-        suffix = stats_for_summary['Player Link'].loc[name]
+        suffix = stats_for_links['Player Link'].loc[name]
         url = link+suffix
         HTML = html.A(name, href=url, target='_blank')
         lis.append(HTML)
@@ -361,22 +364,31 @@ def get_photo(player):
     return encoded_image
 
 def create_nba_stats_table(similar, nba_stats):
-    nba_stats=nba_stats.sort_index()
-    avg_col = ['PTS', 'EFG_PCT', 'FG3_PCT',  'AST', 'REB', 'OREB','STL', 'BLK',  'TOV',
-                 'OWS', 'DWS', 'WS', 'OBPM', 'DBPM', 'BPM',  'PIE', 'NET_RATING', 'PLUS_MINUS']
-    non_avg_col = ['DRAFT_NUMBER', 'DRAFT_ROUND', 'SEASON_EXP', 'active' ]
+        non_avg_col =[ 'RealGM Summary Page', 'Highest Level Reached' , 'Year', 'Team', 'TeamID', 
+                 'Year.1', 'Abbr']
+    link= nba_stats['RealGM Summary Page'].str.split('/', expand=True)
+    name = link.loc[:,2]
+    name1 = name.str.split('-', expand=True)
+    namef = name1[0] + ' ' +name1[1]
+    
+    nba_stats['Name'] = namef
+    nba_stats = nba_stats.set_index('Name')
+    
     test = nba_stats.loc[similar].copy()
-    test.index = test.index.droplevel(1)
+    #test.index = test.index.droplevel(1)
     test= test[~test.index.duplicated(keep='first')]
     test = test[non_avg_col]
     
     df = pd.DataFrame()
     for name in similar:
-        smaller_df = nba_stats.loc[name]
-        avg = smaller_df[avg_col].mean()
-        avg = avg.apply(lambda x: round(x, 2))
-        avg = avg.append(test.loc[name])
-        avg.name=name
+        smaller_df = nba_stats.loc[name] 
+        if type(smaller_df) == pd.Series:
+            avg= smaller_df.drop(non_avg_col)
+        else:
+            avg = smaller_df.drop(non_avg_col, axis=1).mean()
+            avg = avg.apply(lambda x: round(x, 2))
+            avg = avg.append(test.loc[name])
+            avg.name=name
         df =df.append(avg)
     df= df.reset_index()
     x =dash_table.DataTable(
@@ -391,15 +403,22 @@ def create_nba_stats_table(similar, nba_stats):
 #####  if left blank, will just take the players most recent season
 
 
+
+
+
 stats = pd.read_csv('data/app_data.csv')
+stats1 = stats.copy()
+stats1['PlayerName'] = stats1['PlayerName'].str.replace('.', '')
 stats= stats.set_index(['PlayerName', 'Full Year'])
+
+
+
+
+
 
 nba_stats = pd.read_csv('data/nba_stats.csv')
 nba_stats = nba_stats.set_index(['DISPLAY_FIRST_LAST', 'GROUP_VALUE'])
-cols = [ 'AST', 'BLK', 'DRAFT_ROUND', 'DRAFT_NUMBER', 'DREB', 'OREB', 'EFG_PCT', 'FG3A', 'FG3_PCT',
-        'FGA_PG', 'FT_PCT', 'FTA', 'DRAFT_YEAR', 'NET_RATING', 'PLUS_MINUS', 'SEASON_EXP',
-        'STL', 'TOV', 'OWS', 'DWS', 'WS', 'OBPM', 'DBPM', 'BPM', 'active', 'PIE', 'PTS', 'REB']
-nba_stats = nba_stats[cols]
+
 
 
 stats_for_summary = stats.copy()
@@ -418,9 +437,20 @@ drop = ['Player Link', 'Adjusted BPM',
        'Total S %', 'PPR', 'PPS', 'ORtg', 'DRtg', 'PER',
        'Wingspan', 'Pos', 'Hght\n(inches)', 'Wght',
        'RSCI Rank', 'RealGM Link', 'NCAA Seasons\n(D-I)', 'Hgt', 'Birthday (date format)']
+
+
 ss = stats.drop(drop, axis= 1)
 stats_for_surv = stats_for_summary.drop(drop,axis=1)
 stats_for_tsne = stats_for_surv.drop(['NBA_Experience', 'active'], axis=1)
+
+
+stats_for_similar = stats1.copy()
+stats_for_similar= stats_for_similar[~stats_for_similar.index.duplicated(keep='first')]
+stats_for_similar = stats_for_similar.drop(drop, axis=1)
+stats_for_similar = stats_for_similar.drop(['NBA_Experience', 'active'], axis=1)
+stats_for_similar = stats_for_similar.select_dtypes(['number'])
+
+
 #fig = make_tsne(s, 'Stephen Curry')
 #fig1 = make_tsne(s, 'Kevin Durant')
 
@@ -442,6 +472,9 @@ kn.fit(scaled)
 
 
 
+stats_for_similar = stats_for_surv.copy()
+stats_for_similar.index = stats_for_similar.index.str.replace('.', '')
+stats_for_similar.index = stats_for_similar.index.str.replace("'", '')
 
 
 
@@ -467,7 +500,7 @@ summ = get_player_sum(stats_for_summary, player)
 html_summary = create_summary(player)
 html_similar = create_similar(player)
 survfig = get_surv_curv(stats_for_surv, player)
-similar = get_similar_players(stats_for_surv, player)
+similar = get_similar_players(stats_for_similar, player)
 advancedOptions = [dict(label='Percentile', value = 'Percentile'),dict(label='Raw', value='Raw')]
 colOptions = get_cols(stats)
 colValues =['MIN', 'FGM', 'FGA', 'FG%', '3PM', '3PA']
@@ -475,7 +508,7 @@ dotfig = nba_dot_plot(stats, player, col=colValues)
 
 
 
-#table = create_nba_stats_table(similar[0:6], nba_stats)
+table = create_nba_stats_table(similar, nba_stats)
 
 
 
@@ -573,10 +606,10 @@ app.layout= html.Div(
                 html.Div(
                         [
                            html_similar], id='similar'),
-                #html.Div(
-                 #       [
-                  #              table
-                   #             ], id='similar_table')
+                html.Div(
+                        [
+                                table
+                                ], id='similar_table')
                             
                 
                                     
@@ -808,13 +841,13 @@ def update_similar(player):
     sim = create_similar(player)
     return sim
     
-#@app.callback(
- #       dash.dependencies.Output('similar_table', 'children'),
-  #      [dash.dependencies.Input('player dropdown', 'value')])
-#def update_sim_table(player):
- #   sim = get_similar_players(stats_for_surv, player)
-  #  table = create_nba_stats_table(sim, nba_stats)
-   # return table
+@app.callback(
+        dash.dependencies.Output('similar_table', 'children'),
+        [dash.dependencies.Input('player dropdown', 'value')])
+def update_sim_table(player):
+    sim = get_similar_players(stats_for_surv, player)
+    table = create_nba_stats_table(sim, nba_stats)
+    return table
 
 
 
