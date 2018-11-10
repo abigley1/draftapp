@@ -451,7 +451,7 @@ player = 'Stephen Curry'
 year = '2009'
 yearOptions = get_years(stats)
 playerOptions = get_players(stats, int(year))
-dotfig = nba_dot_plot(stats, player)
+
 tsnefig = make_tsne(stats_for_tsne, player)
 summ = get_player_sum(stats_for_summary, player)
 html_summary = create_summary(player)
@@ -461,7 +461,7 @@ similar = get_similar_players(stats_for_surv, player)
 advancedOptions = [dict(label='Percentile', value = 'Percentile'),dict(label='Raw', value='Raw')]
 colOptions = get_cols(stats)
 colValues =['MIN', 'FGM', 'FGA', 'FG%', '3PM', '3PA']
-
+dotfig = nba_dot_plot(stats, player, col=colValues)
 
 
 
