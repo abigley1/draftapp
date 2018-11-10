@@ -247,7 +247,7 @@ def get_similar_players(data, player): #must remove active column from dataset i
     
     kn.fit(scaled)#.rank(pct=True))
     
-    x = kn.kneighbors(scaled_player, 5)
+    x = kn.kneighbors(scaled_player, 6)
     return(data.iloc[x[1][0]].index.values)
     
 def get_players(data, year):
