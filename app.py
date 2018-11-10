@@ -15,6 +15,7 @@ Created on Mon Nov  5 13:29:17 2018
 """
 
 import dash
+import xlrd
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
@@ -416,7 +417,7 @@ stats= stats.set_index(['PlayerName', 'Full Year'])
 
 
 
-nba_stats = pd.read_excel('data/NBARealGM.xlsx')
+nba_stats = pd.read_excel('data/NBARealGM.xlsx', header=1)
 nba_stats = nba_stats.set_index(['DISPLAY_FIRST_LAST', 'GROUP_VALUE'])
 
 
