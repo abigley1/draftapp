@@ -570,7 +570,7 @@ app.layout= html.Div(
                             
                 
                                     
-        ], , style = {'max-width':1250, 'margin':'auto'})
+        ],  style = {'max-width':1250, 'margin':'auto'})
     
 @app.callback(
         dash.dependencies.Output('player dropdown', 'options'),
