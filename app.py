@@ -191,6 +191,11 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
     X = data.loc[[player]].drop(['NBA_Experience', 'active'], axis = 1)
     league_surv = cph.baseline_survival_
     player_surv = cph.predict_survival_function(X)
+    x = data.drop(['NBA_Experience', 'active'], axis = 1)
+    predictions  = cph.predict_expectation(x)
+    percentiles = predictions.rank(pct=True)
+    player_pct = percentiles.loc[player]
+    string='Career Length Prediction Percentile: ' +str(round(player_pct.values[0], 2))
     
     trace1 = go.Scatter(
         name = 'League Average',
@@ -207,10 +212,15 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
     layout = go.Layout({ 
           "xaxis": {"title": "Years in the NBA", }, 
           "yaxis": {"title": "Likelyhood"},
-          'margin': {'t':25}
-             })
+          'margin': {'t':25, 'r':25},
+          'annotations':[{'x':13, 'y':0.7, 'text':string, 'showarrow':False, 'font':{'size':14}}],
+          'legend':{'x':.8, 'y':1, 'traceorder':'normal'} })
     
     fig = go.Figure(data=data, layout=layout)
+
+    
+
+    return fig
 
     
 
@@ -605,6 +615,11 @@ def get_surv_curv(player):
     X = stats_for_surv.loc[[player]].drop(['NBA_Experience', 'active'], axis = 1)
     league_surv = cph.baseline_survival_
     player_surv = cph.predict_survival_function(X)
+    x = stats_for_surv.drop(['NBA_Experience', 'active'], axis = 1)
+    predictions  = cph.predict_expectation(x)
+    percentiles = predictions.rank(pct=True)
+    player_pct = percentiles.loc[player]
+    string='Career Length Prediction Percentile: ' +str(round(player_pct.values[0], 2))
     
     trace1 = go.Scatter(
         name = 'League Average',
@@ -621,7 +636,10 @@ def get_surv_curv(player):
     layout = go.Layout({
           "xaxis": {"title": "Years in the NBA", }, 
           "yaxis": {"title": "Likelyhood"},
-           'margin': {'t':25}
+           'margin': {'t':25, 'r':0},
+          'annotations':[{'x':13, 'y':0.7, 'text':string, 'showarrow':False, 'font':{'size':14}}],
+          'legend':{'x':.8, 'y':1, 'traceorder':'normal'}
+           
              })
     
     fig = go.Figure(data=data, layout=layout)
