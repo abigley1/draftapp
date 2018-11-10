@@ -74,104 +74,112 @@ def make_tsne(data, inital_player):
     )
 
     data1 = [trace1, trace2]
-    layout = go.Layout(
-        margin=dict(
-            l=0,
-            r=0,
-            b=0,
-            t=0
-        )
-    )
+    layout = go.Layout({'hovermode':'closest', 
+                        'margin':{'t':0, 'r':0, 'l':0, 'b':0}})
     fig = go.Figure(data = data1, layout=layout)
     return fig
 
-def nba_dot_plot(data, player):
-    cols = ['FGM', 'FGA', 'FG%', '3PM', '3PA', '3P%', 'FTM', 'FTA', 'FT%']
-    s = data[cols].rank(pct=True).loc[player]*100
+def nba_dot_plot(stats, player, col,  data_type='Percentile'):
+    cols = col
+    if data_type == 'Percentile':
+        s = stats[cols].rank(pct=True).loc[player]
+        s = s*100
+    else:
+        s = stats[cols].loc[player]
+    
     if len(s.index) == 1:
         data1=[]
         trace2 = go.Scatter(x= s.iloc[0], 
               y= cols, 
-              marker= {"color": '#66c2a5', "size": 12}, 
+              marker= {"color": '#bdd7e7', "size": 12}, 
               mode= "markers", 
-              name = data['Year'].loc[player].iloc[0])
+              name = stats['Year at School'].iloc[0])
         data1 = [trace2]
     if len(s.index) == 2: 
         trace1 = {"x": s.iloc[0], 
               "y": cols, 
-              "marker": {"color": "#66c2a5", "size": 12, "opacity":0.5}, 
+              "marker": {"color": "#bdd7e7", "size": 12}, 
               "mode": "markers", 
-              "name":data['Year'].loc[player].iloc[0], 
+              "name":stats['Year at School'].loc[player].iloc[0], 
               "type": "scatter", 
                  }
         trace2 = {"x": s.iloc[1], 
               "y": cols, 
-              "marker": {"color": "#fc8d62", "size": 12}, 
+              "marker": {"color": "#6baed6", "size": 12}, 
               "mode": "markers", 
-              "name":data['Year'].loc[player].iloc[1], 
+              "name":stats['Year at School'].loc[player].iloc[1], 
               "type": "scatter", 
                  }
         data1 = [trace1, trace2]
     if len(s.index) == 3: 
         trace1 = {"x": s.iloc[0], 
               "y": cols, 
-              "marker": {"color": "#66c2a5", "size": 12, "opacity":0.33}, 
+              "marker": {"color": "#bdd7e7", "size": 12}, 
               "mode": "markers", 
-              "name":data['Year'].loc[player].iloc[0], 
+              "name":stats['Year at School'].loc[player].iloc[0], 
               "type": "scatter", 
                  }
         trace2 = {"x": s.iloc[1], 
               "y": cols, 
-              "marker": {"color": "#fc8d62", "size": 12, "opacity":0.66}, 
+              "marker": {"color": "#6baed6", "size": 12}, 
               "mode": "markers", 
-              "name":data['Year'].loc[player].iloc[1], 
+              "name":stats['Year at School'].loc[player].iloc[1], 
               "type": "scatter", 
                  }
         trace3 = {"x": s.iloc[2], 
               "y": cols, 
-              "marker": {"color": "#8da0cb", "size": 12}, 
+              "marker": {"color": "#3182bd", "size": 12}, 
               "mode": "markers", 
-              "name":data['Year'].loc[player].iloc[2], 
+              "name":stats['Year at School'].loc[player].iloc[2], 
               "type": "scatter", 
+              "hovertext":stats[cols].loc[player].values
                  }
         data1=[trace1, trace2, trace3]
     if len(s.index) == 4:
         trace1 = {"x": s.iloc[0], 
           "y": cols, 
-          "marker":{"color": "#66c2a5", "size": 12, "opacity":0.25}, 
+          "marker":{"color": "#bdd7e7", "size": 12}, 
           "mode": "markers", 
-          "name":data['Year'].loc[player].iloc[0], 
+          "name":stats['Year at School'].loc[player].iloc[0], 
           "type": "scatter", 
              }
         trace2 = {"x": s.iloc[1], 
           "y": cols, 
-          "marker": {"color": "#fc8d62", "size": 12, "opacity":0.5}, 
+          "marker": {"color": "#6baed6", "size": 12}, 
           "mode": "markers", 
-          "name":data['Year'].loc[player].iloc[1], 
+          "name":stats['Year at School'].loc[player].iloc[1], 
           "type": "scatter", 
              }
         trace3 = {"x": s.iloc[2], 
           "y": cols, 
-          "marker": {"color": "#8da0cb", "size": 12, "opacity":0.75}, 
+          "marker": {"color": "#3182bd", "size": 12}, 
           "mode": "markers", 
-          "name":data['Year'].loc[player].iloc[2], 
+          "name":stats['Year at School'].loc[player].iloc[2], 
           "type": "scatter", 
              }
         trace4 = {"x": s.iloc[3], 
           "y": cols, 
-          "marker": {"color": "#e78ac3", "size": 12}, 
+          "marker": {"color": "#08519c", "size": 12}, 
           "mode": "markers", 
-          "name":data['Year'].loc[player].iloc[3], 
+          "name":stats['Year at School'].loc[player].iloc[3], 
           "type": "scatter", 
              }
         data1 = [trace1, trace2, trace3, trace4]
-            
-    layout = { 
-          "xaxis": {"title": "Percentile Rank", 'range':[0,100] }, 
-          "yaxis": {"title": "Stat"},
-          'margin': {'t':25},
-          'height':400
-             }
+    if data_type == 'Percentile':
+        
+        layout = { 
+              "xaxis": {"title": "Percentile Rank",  'range':[0,100]} , 
+              "yaxis": {"title": "Stat"},
+              'margin': {'t':25, 'r':0},
+              'hovermode':'closest'
+                 }
+    else:
+        layout = { 
+              "xaxis": {"title": "Count Per Game"}, 
+              "yaxis": {"title": "Stat"},
+              'margin': {'t':25, 'r':0},
+              'hovermode':'closest',
+                 }
 
     fig = go.Figure(data=data1, layout=layout )
     return fig
@@ -660,14 +668,8 @@ def update_tsne(player):
             
 
     data1 = [trace1, trace2]
-    layout = go.Layout(
-        margin=dict(
-            l=0,
-            r=0,
-            b=0,
-            t=0
-        )
-    )
+    layout = go.Layout({'hovermode':'closest', 
+                        'margin':{'t':0, 'r':0, 'l':0, 'b':0}})
     fig = go.Figure(data = data1, layout=layout)
     return fig
     
@@ -688,76 +690,77 @@ def update_dotplot(player, data_type, col):
         data1=[]
         trace2 = go.Scatter(x= s.iloc[0], 
               y= cols, 
-              marker= {"color": '#66c2a5', "size": 12}, 
+              marker= {"color": '#bdd7e7', "size": 12}, 
               mode= "markers", 
-              name = stats['Year'].loc[player].iloc[0])
+              name = stats['Year at School'].iloc[0])
         data1 = [trace2]
     if len(s.index) == 2: 
         trace1 = {"x": s.iloc[0], 
               "y": cols, 
-              "marker": {"color": "#66c2a5", "size": 12, "opacity":0.5}, 
+              "marker": {"color": "#bdd7e7", "size": 12}, 
               "mode": "markers", 
-              "name":stats['Year'].loc[player].iloc[0], 
+              "name":stats['Year at School'].loc[player].iloc[0], 
               "type": "scatter", 
                  }
         trace2 = {"x": s.iloc[1], 
               "y": cols, 
-              "marker": {"color": "#fc8d62", "size": 12}, 
+              "marker": {"color": "#6baed6", "size": 12}, 
               "mode": "markers", 
-              "name":stats['Year'].loc[player].iloc[1], 
+              "name":stats['Year at School'].loc[player].iloc[1], 
               "type": "scatter", 
                  }
         data1 = [trace1, trace2]
     if len(s.index) == 3: 
         trace1 = {"x": s.iloc[0], 
               "y": cols, 
-              "marker": {"color": "#66c2a5", "size": 12, "opacity":0.33}, 
+              "marker": {"color": "#bdd7e7", "size": 12}, 
               "mode": "markers", 
-              "name":stats['Year'].loc[player].iloc[0], 
+              "name":stats['Year at School'].loc[player].iloc[0], 
               "type": "scatter", 
                  }
         trace2 = {"x": s.iloc[1], 
               "y": cols, 
-              "marker": {"color": "#fc8d62", "size": 12, "opacity":0.66}, 
+              "marker": {"color": "#6baed6", "size": 12}, 
               "mode": "markers", 
-              "name":stats['Year'].loc[player].iloc[1], 
+              "name":stats['Year at School'].loc[player].iloc[1], 
               "type": "scatter", 
                  }
         trace3 = {"x": s.iloc[2], 
               "y": cols, 
-              "marker": {"color": "#8da0cb", "size": 12}, 
+              "marker": {"color": "#3182bd", "size": 12}, 
               "mode": "markers", 
-              "name":stats['Year'].loc[player].iloc[2], 
+              "name":stats['Year at School'].loc[player].iloc[2], 
               "type": "scatter", 
+              "hovertext":stats[cols].loc[player].values
                  }
         data1=[trace1, trace2, trace3]
     if len(s.index) == 4:
         trace1 = {"x": s.iloc[0], 
           "y": cols, 
-          "marker":{"color": "#66c2a5", "size": 12, "opacity":0.25}, 
+          "marker":{"color": "#bdd7e7", "size": 12}, 
           "mode": "markers", 
-          "name":stats['Year'].loc[player].iloc[0], 
+          "name":stats['Year at School'].loc[player].iloc[0], 
           "type": "scatter", 
              }
         trace2 = {"x": s.iloc[1], 
           "y": cols, 
-          "marker": {"color": "#fc8d62", "size": 12, "opacity":0.5}, 
+          "marker": {"color": "#6baed6", "size": 12}, 
           "mode": "markers", 
-          "name":stats['Year'].loc[player].iloc[1], 
+          "name":stats['Year at School'].loc[player].iloc[1], 
           "type": "scatter", 
              }
         trace3 = {"x": s.iloc[2], 
           "y": cols, 
-          "marker": {"color": "#8da0cb", "size": 12, "opacity":0.75}, 
+          "marker": {"color": "#3182bd", "size": 12}, 
           "mode": "markers", 
-          "name":stats['Year'].loc[player].iloc[2], 
+          "name":stats['Year at School'].loc[player].iloc[2], 
           "type": "scatter", 
              }
         trace4 = {"x": s.iloc[3], 
           "y": cols, 
-          "marker": {"color": "#e78ac3", "size": 12}, 
+          "marker": {"color": "#08519c", "size": 12}, 
           "mode": "markers", 
-          "name":stats['Year'].loc[player].iloc[3], 
+          "name":stats['Year at School'].loc[player].iloc[3], 
           "type": "scatter", 
              }
         data1 = [trace1, trace2, trace3, trace4]
@@ -766,13 +769,15 @@ def update_dotplot(player, data_type, col):
         layout = { 
               "xaxis": {"title": "Percentile Rank",  'range':[0,100]} , 
               "yaxis": {"title": "Stat"},
-              'margin': {'t':25}
+              'margin': {'t':25, 'r':0},
+              'hovermode':'closest'
                  }
     else:
         layout = { 
               "xaxis": {"title": "Count Per Game"}, 
               "yaxis": {"title": "Stat"},
-              'margin': {'t':25}
+              'margin': {'t':25, 'r':0},
+              'hovermode':'closest',
                  }
 
     fig = go.Figure(data=data1, layout=layout )
