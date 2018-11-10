@@ -12,3 +12,4 @@ scikit_learn==0.20.0
 gunicorn==19.7.1
 flask==0.12
 flask_cors
+xlrd
