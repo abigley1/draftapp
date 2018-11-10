@@ -364,7 +364,7 @@ def get_photo(player):
     return encoded_image
 
 def create_nba_stats_table(similar, nba_stats):
-        non_avg_col =[ 'RealGM Summary Page', 'Highest Level Reached' , 'Year', 'Team', 'TeamID', 
+    non_avg_col =[ 'RealGM Summary Page', 'Highest Level Reached' , 'Year', 'Team', 'TeamID', 
                  'Year.1', 'Abbr']
     link= nba_stats['RealGM Summary Page'].str.split('/', expand=True)
     name = link.loc[:,2]
