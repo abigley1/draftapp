@@ -417,7 +417,6 @@ stats= stats.set_index(['PlayerName', 'Full Year'])
 
 
 nba_stats = pd.read_excel('data/NBARealGM.xlsx', header=1)
-nba_stats = nba_stats.set_index(['DISPLAY_FIRST_LAST', 'GROUP_VALUE'])
 
 
 
