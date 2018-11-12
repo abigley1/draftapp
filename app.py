@@ -39,7 +39,7 @@ def make_tsne(data, inital_player):
     fit  = tsne.fit_transform(X_std)
 
     trace1 = go.Scatter(
-        showlegend=False
+        showlegend=False,
         x=fit[:,0],
         y=fit[:,1],
         text = data.index.get_level_values(0).values,
@@ -747,7 +747,7 @@ def update_tsne(player):
 
         x=fit[:,0],
         y=fit[:,1],
-        showlegend=False
+        showlegend=False,
         text = stats_for_tsne.index.get_level_values(0).values,
         hoverinfo = 'text',
         mode='markers',
