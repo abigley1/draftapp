@@ -907,7 +907,7 @@ def update_similar(player):
         dash.dependencies.Output('similar_table', 'children'),
         [dash.dependencies.Input('player dropdown', 'value'),
          dash.dependencies.Input('sim data type', 'value')])
-def update_sim_table(player):
+def update_sim_table(player,dtype):
     sim = get_similar_players(stats_for_surv, player)
     table = create_nba_stats_table(sim, nba_stats,dtype)
     return table
