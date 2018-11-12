@@ -39,7 +39,7 @@ def make_tsne(data, inital_player):
     fit  = tsne.fit_transform(X_std)
 
     trace1 = go.Scatter(
-
+        showlegend=False
         x=fit[:,0],
         y=fit[:,1],
         text = data.index.get_level_values(0).values,
@@ -75,7 +75,8 @@ def make_tsne(data, inital_player):
 
     data1 = [trace1, trace2]
     layout = go.Layout({'hovermode':'closest', 
-                        'margin':{'t':0, 'r':0, 'l':0, 'b':0}})
+                        'margin':{'t':0, 'r':0, 'l':0, 'b':0},
+                        'legend':{'x':0, 'y':1}})
     fig = go.Figure(data = data1, layout=layout)
     return fig
 
@@ -363,9 +364,27 @@ def get_photo(player):
     encoded_image = base64.b64encode(open(url, 'rb').read())
     return encoded_image
 
-def create_nba_stats_table(similar, nba_stats):
+def create_nba_stats_table(similar, nba_stats, dtype):
+    per_game_cols = ['active', 'NBA Exp', 'MIN', 'FGM', 'FGA', 'FG%',
+       '3PM', '3PA', '3P%', 'FTM', 'FTA', 'FT%', 'OFF', 'DEF', 'TRB', 'AST',
+       'STL', 'BLK', 'PF', 'TOV', 'PTS']
+    
+    totals_cols = ['active', 'NBA Exp', 'MIN.1', 'FGM.1',
+       'FGA.1', 'FG%.1', '3PM.1', '3PA.1', '3P%.1', 'FTM.1', 'FTA.1', 'FT%.1',
+       'OFF.1', 'DEF.1', 'TRB.1', 'AST.1', 'STL.1', 'BLK.1', 'PF.1', 'TOV.1',
+       'PTS.1']
+    
+    advanced_cols = ['active', 'NBA Exp', 'Dbl Dbl', 'Tpl Dbl', '40 Pts', '20 Reb',
+       '20 Ast', 'Techs', 'HOB', 'Ast/TO', 'Stl/TO', 'FT/FGA', "W's", "L's",
+       'Win %', 'OWS', 'DWS', 'WS', 'TS%', 'eFG%', 'ORB%',
+       'DRB%', 'TRB%', 'AST%', 'TOV%', 'STL%', 'BLK%', 'USG%', 'Total S %',
+       'PPR', 'PPS', 'ORtg', 'DRtg', 'PER']
+    
+    
     non_avg_col =[ 'RealGM Summary Page', 'Highest Level Reached' , 'Year', 'Team', 'TeamID', 
                  'Year.1', 'Abbr']
+    
+    
     link= nba_stats['RealGM Summary Page'].str.split('/', expand=True)
     name = link.loc[:,2]
     name1 = name.str.split('-', expand=True)
@@ -374,22 +393,52 @@ def create_nba_stats_table(similar, nba_stats):
     nba_stats['Name'] = namef
     nba_stats = nba_stats.set_index('Name')
     
-    test = nba_stats.loc[similar].copy()
-    #test.index = test.index.droplevel(1)
-    test= test[~test.index.duplicated(keep='first')]
-    test = test[non_avg_col]
+    
+    placeholder = nba_stats.loc[similar].copy()
+    placeholder.index = placeholder.index.str.replace('.', '')
+    placeholder.index = placeholder.index.str.replace("'", '')
+    placeholder.index = placeholder.index.str.replace(' Jr', '')
+    placeholder= placeholder[~placeholder.index.duplicated(keep='first')]
+    placeholder = placeholder[non_avg_col]
     
     df = pd.DataFrame()
+    
+    
     for name in similar:
-        smaller_df = nba_stats.loc[name] 
+        
+        name = name.replace('.', '')
+        name = name.replace("'", '')
+        name = name.replace(' Jr', '')
+        name1=name
+        if name == 'Darius Johnson Odom': #deal with werid name cuts
+            name1 = name1.split('-')[0]
+        if name =='Al-Farouq Aminu':
+            name1 = 'Al Farouq'
+        
+        smaller_df = nba_stats.loc[name1] 
+        career_len = len(smaller_df)
+        
+        temp = smaller_df.copy()
+        temp = temp[~temp.index.duplicated(keep='last')]
+        active = temp['Year.1'] ==2018
+    
+        smaller_df['NBA Exp'] = career_len
+        smaller_df['active'] = active
+        
         if type(smaller_df) == pd.Series:
             avg= smaller_df.drop(non_avg_col)
         else:
             avg = smaller_df.drop(non_avg_col, axis=1).mean()
             avg = avg.apply(lambda x: round(x, 2))
-            avg = avg.append(test.loc[name])
+            avg = avg.append(placeholder.loc[name])
             avg.name=name
         df =df.append(avg)
+    if dtype == 'per_game':
+        df = df[per_game_cols]  
+    if dtype == 'Advanced':
+        df = df[advanced_cols]
+    if dtype =='totals':
+        df = df[totals_cols] 
     df= df.reset_index()
     x =dash_table.DataTable(
             id='name',
@@ -501,13 +550,15 @@ html_similar = create_similar(player)
 survfig = get_surv_curv(stats_for_surv, player)
 similar = get_similar_players(stats_for_similar, player)
 advancedOptions = [dict(label='Percentile', value = 'Percentile'),dict(label='Raw', value='Raw')]
+advancedOptionsSim = [dict(label='Per Game', value = 'per_game'),dict(label='Advanced', value='Advanced'), dict(label='Totals', value='totals')]
+
 colOptions = get_cols(stats)
 colValues =['MIN', 'FGM', 'FGA', 'FG%', '3PM', '3PA']
 dotfig = nba_dot_plot(stats, player, col=colValues)
 
 
 
-table = create_nba_stats_table(similar, nba_stats)
+table = create_nba_stats_table(similar, nba_stats, 'per_game')
 
 
 
@@ -596,15 +647,25 @@ app.layout= html.Div(
                 
                 html.Div(
                         [
-                            html.H2('Clustering',
-                                    style={'text-align':'center'}),
-                            dcc.Graph(figure=tsnefig,
-                                      id='tsneplot')
+                            html.Div(
+                                    [
+                                dcc.Graph(figure=tsnefig,
+                                      id='tsneplot', style={'display':'inline-block', 'width':'89%'}),
+                                          
+                                html.Div(
+                                        [html_similar], id='similar', style={'display':'inline-block', 'width':'10%',
+                                        'vertical-align':'top', 'margin':{'t':'75px'}}),
+                               
+                                            ])
+                            
                         ]
                         ),
                 html.Div(
                         [
-                           html_similar], id='similar'),
+                                dcc.RadioItems(id='sim data type',
+                                     options = advancedOptionsSim,
+                                     value = 'per_game',
+                                        )]),
                 html.Div(
                         [
                                 table
@@ -686,6 +747,7 @@ def update_tsne(player):
 
         x=fit[:,0],
         y=fit[:,1],
+        showlegend=False
         text = stats_for_tsne.index.get_level_values(0).values,
         hoverinfo = 'text',
         mode='markers',
@@ -719,7 +781,8 @@ def update_tsne(player):
 
     data1 = [trace1, trace2]
     layout = go.Layout({'hovermode':'closest', 
-                        'margin':{'t':0, 'r':0, 'l':0, 'b':0}})
+                        'margin':{'t':0, 'r':0, 'l':0, 'b':0},
+                       'legend':{'x':0, 'y':1}})
     fig = go.Figure(data = data1, layout=layout)
     return fig
     
@@ -842,10 +905,11 @@ def update_similar(player):
     
 @app.callback(
         dash.dependencies.Output('similar_table', 'children'),
-        [dash.dependencies.Input('player dropdown', 'value')])
+        [dash.dependencies.Input('player dropdown', 'value'),
+         dash.dependencies.Input('sim data type', 'value')])
 def update_sim_table(player):
     sim = get_similar_players(stats_for_surv, player)
-    table = create_nba_stats_table(sim, nba_stats)
+    table = create_nba_stats_table(sim, nba_stats,dtype)
     return table
 
 
