@@ -171,14 +171,14 @@ def nba_dot_plot(stats, player, col,  data_type='Percentile'):
         layout = { 
               "xaxis": {"title": "Percentile Rank",  'range':[0,100]} , 
               "yaxis": {"title": "Stat"},
-              'margin': {'t':25, 'r':'30'},
+              'margin': {'t':50, 'r':30},
               'hovermode':'closest'
                  }
     else:
         layout = { 
               "xaxis": {"title": "Count Per Game"}, 
               "yaxis": {"title": "Stat"},
-              'margin': {'t':25, 'r':'30'},
+              'margin': {'t':50, 'r':30},
               'hovermode':'closest',
                  }
 
