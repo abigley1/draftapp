@@ -201,7 +201,8 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
     trace1 = go.Scatter(
         name = 'League Average',
         x=league_surv.index,
-        y=league_surv['baseline survival'].values
+        y=league_surv['baseline survival'].values,
+        marker = {'color':"#08519c"}
             )
     trace2 = go.Scatter(
         name = player,
@@ -213,7 +214,8 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
     layout = go.Layout({ 
           "xaxis": {"title": "Years in the NBA", }, 
           "yaxis": {"title": "Probability of remaining in the NBA"},
-          'margin': {'t':'50px', 'r':'30px'},
+          
+          'margin': {'t':50, 'r':30},
           'annotations':[{'x':13, 'y':0.78, 'text':string, 'showarrow':False, 'font':{'size':14}}],
           'legend':{'x':.8, 'y':1, 'traceorder':'normal'} })
     
@@ -728,7 +730,8 @@ def get_surv_curv(player):
     trace1 = go.Scatter(
         name = 'League Average',
         x=league_surv.index,
-        y=league_surv['baseline survival'].values
+        y=league_surv['baseline survival'].values,
+        marker = {'color':"#08519c"}
             )
     trace2 = go.Scatter(
         name = player,
@@ -739,8 +742,8 @@ def get_surv_curv(player):
     data = [trace1, trace2]
     layout = go.Layout({
           "xaxis": {"title": "Years in the NBA", }, 
-          "yaxis": {"title": "Likelyhood"},
-           'margin': {'t':40, 'r':0},
+          "yaxis": {"title": "Probability of remaining in the NBA"},
+           'margin': {'t':50, 'r':30},
           'annotations':[{'x':13, 'y':0.78, 'text':string, 'showarrow':False, 'font':{'size':14}}],
           'legend':{'x':.8, 'y':1, 'traceorder':'normal'}
            
@@ -765,7 +768,7 @@ def update_tsne(player):
         marker=dict(
             size=12,
             line=dict(
-                color='rgba(217, 217, 217, 0.14)',
+                color='#08519c',
                 width=0.5
             )
 
@@ -893,14 +896,14 @@ def update_dotplot(player, data_type, col):
         layout = { 
               "xaxis": {"title": "Percentile Rank",  'range':[0,100]} , 
               "yaxis": {"title": "Stat"},
-              'margin': {'t':25, 'r':0},
+              'margin': {'t':50, 'r':30},
               'hovermode':'closest'
                  }
     else:
         layout = { 
               "xaxis": {"title": "Count Per Game"}, 
               "yaxis": {"title": "Stat"},
-              'margin': {'t':25, 'r':0},
+              'margin': {'t':50, 'r':30},
               'hovermode':'closest',
                  }
 
