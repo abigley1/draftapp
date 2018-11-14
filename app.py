@@ -269,7 +269,7 @@ def get_players(data, year):
 def get_years(data):
     years = list(set(data['Year'].values))
     y =list()
-    for year in years:
+    for year in sorted(years):
         d = dict(label= year, value=year)
         y.append(d)
     return y
