@@ -625,7 +625,8 @@ app.layout= html.Div(
                                        'height':'450px'} ),
                         html.Div(
                                 [   dcc.Graph(figure=survfig,
-                                              id='survcurv',  )    
+                                              id='survcurv',
+                                      config={'displayModeBar': False}  )    
                                         ], style={'width':'80%', 'display':'inline-block', 'margin-top':'8px'} , )]
                                 ),                 
                 
@@ -652,7 +653,8 @@ app.layout= html.Div(
         
                             dcc.Graph(figure=dotfig,
                                       id='dotplot',
-                                      style={'width':'80%', 'display':'inline-block', 'margin-top':'8px'}),    
+                                      style={'width':'80%', 'display':'inline-block', 'margin-top':'8px'},
+                                      config={'displayModeBar': False}),    
                                 ], style={'display':'inlinle-block'}),
                 
                 
