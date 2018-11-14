@@ -48,7 +48,7 @@ def make_tsne(data, inital_player):
         marker=dict(
             size=12,
             line=dict(
-                color='rgba(217, 217, 217, 0.14)',
+                color='#08519c',
                 width=0.5
             )
 
@@ -212,8 +212,8 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
     data = [trace1, trace2]
     layout = go.Layout({ 
           "xaxis": {"title": "Years in the NBA", }, 
-          "yaxis": {"title": "Likelyhood"},
-          'margin': {'t':40, 'r':25},
+          "yaxis": {"title": "Probability of remaining in the NBA"},
+          'margin': {'t':50, 'r':30},
           'annotations':[{'x':13, 'y':0.78, 'text':string, 'showarrow':False, 'font':{'size':14}}],
           'legend':{'x':.8, 'y':1, 'traceorder':'normal'} })
     
@@ -416,7 +416,10 @@ def create_nba_stats_table(similar, nba_stats, dtype):
             name1 = 'Al Farouq'
         
         smaller_df = nba_stats.loc[name1] 
-        career_len = len(smaller_df)
+        if len(smaller_df) == 85:
+            career_len = 1
+        else:
+            career_len = len(smaller_df)
         
         temp = smaller_df.copy()
         temp = temp[~temp.index.duplicated(keep='last')]
@@ -485,17 +488,22 @@ drop = ['Player Link', 'Adjusted BPM',
        'Total S %', 'PPR', 'PPS', 'ORtg', 'DRtg', 'PER',
        'Wingspan', 'Pos', 'Hght\n(inches)', 'Wght',
        'RSCI Rank', 'RealGM Link', 'NCAA Seasons\n(D-I)', 'Hgt', 'Birthday (date format)']
+col_touse = ['NBA_Experience', 'active','OWS', 'Ast/TO', 'TOV%', 'TS%', 'STL%', 'TRB%'] 
+
+cols_for_sim = [ 'FGA/3A','TS%', 'AST%', 'ORB%', 'DRB%', 'STL%', 'BLK%', 'TOV%', 'USG%', 'Hght\n(inches)', 'Wingspan', 'Wght']
 
 
-ss = stats.drop(drop, axis= 1)
-stats_for_surv = stats_for_summary.drop(drop,axis=1)
+ss = stats[to_use]
+stats_for_surv = stats_for_summary[col_touse]
 stats_for_tsne = stats_for_surv.drop(['NBA_Experience', 'active'], axis=1)
 
 
 stats_for_similar = stats1.copy()
 stats_for_similar= stats_for_similar[~stats_for_similar.index.duplicated(keep='first')]
-stats_for_similar = stats_for_similar.drop(drop, axis=1)
-stats_for_similar = stats_for_similar.drop(['NBA_Experience', 'active'], axis=1)
+stats_for_similar['FGA/3A'] = stats_for_similar['FGA']/stats_for_similar['3PA']
+
+stats_for_similar = stats_for_similar[cols_for_sim]
+
 stats_for_similar = stats_for_similar.select_dtypes(['number'])
 
 
@@ -553,7 +561,9 @@ advancedOptions = [dict(label='Percentile', value = 'Percentile'),dict(label='Ra
 advancedOptionsSim = [dict(label='Per Game', value = 'per_game'),dict(label='Advanced', value='Advanced'), dict(label='Totals', value='totals')]
 
 colOptions = get_cols(stats)
-colValues =['MIN', 'FGM', 'FGA', 'FG%', '3PM', '3PA']
+colValues =col_touse
+colValues.pop(0)
+
 dotfig = nba_dot_plot(stats, player, col=colValues)
 
 
@@ -608,13 +618,13 @@ app.layout= html.Div(
                                            html_summary,
                                            
                                                 ], id='player summary')],
-                                style={'width':'23%', 'display':'inline-block', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'
+                                style={'width':'19%', 'display':'inline-block', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'
                                        , 'background-color':'#fafafa', 'margin-top':'8px', 'margin-right':'5px', 'vertical-align':'top',
                                        'height':'450px'} ),
                         html.Div(
                                 [   dcc.Graph(figure=survfig,
                                               id='survcurv',  )    
-                                        ], style={'width':'72%', 'display':'inline-block'} , )]
+                                        ], style={'width':'80%', 'display':'inline-block', 'margin-top':'8px'} , )]
                                 ),                 
                 
                 html.Div(
@@ -633,14 +643,14 @@ app.layout= html.Div(
                                              multi=True,
                                              
                                              ),   
-                                            ], style={'width':'24%', 'display':'inline-block',
+                                            ], style={'width':'19%', 'display':'inline-block',
                                                     'vertical-align':'top', 'margin-top':'3%'}),
 
                             
         
                             dcc.Graph(figure=dotfig,
                                       id='dotplot',
-                                      style={'width':'75%', 'display':'inline-block'}),    
+                                      style={'width':'80%', 'display':'inline-block', 'margin-top':'8px'}),    
                                 ], style={'display':'inlinle-block'}),
                 
                 
@@ -648,13 +658,14 @@ app.layout= html.Div(
                 html.Div(
                         [
                             html.Div(
+                                        [html_similar], id='similar', style={'display':'inline-block', 'width':'19%',
+                                        'vertical-align':'top', 'margin':{'t':'75px', 'r':'5px'}}),
+                            html.Div(
                                     [
                                 dcc.Graph(figure=tsnefig,
-                                      id='tsneplot', style={'display':'inline-block', 'width':'89%'}),
+                                      id='tsneplot', style={'display':'inline-block', 'width':'80%'}),
                                           
-                                html.Div(
-                                        [html_similar], id='similar', style={'display':'inline-block', 'width':'10%',
-                                        'vertical-align':'top', 'margin':{'t':'75px'}}),
+                                
                                
                                             ])
                             
