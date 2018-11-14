@@ -493,7 +493,7 @@ col_touse = ['NBA_Experience', 'active','OWS', 'Ast/TO', 'TOV%', 'TS%', 'STL%', 
 cols_for_sim = [ 'FGA/3A','TS%', 'AST%', 'ORB%', 'DRB%', 'STL%', 'BLK%', 'TOV%', 'USG%', 'Hght\n(inches)', 'Wingspan', 'Wght']
 
 
-ss = stats[to_use]
+ss = stats[col_touse]
 stats_for_surv = stats_for_summary[col_touse]
 stats_for_tsne = stats_for_surv.drop(['NBA_Experience', 'active'], axis=1)
 
