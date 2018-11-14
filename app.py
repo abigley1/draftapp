@@ -661,7 +661,7 @@ app.layout= html.Div(
                                     [
                                 html.Div(
                                         [html_similar], id='similar', style={'display':'inline-block', 'width':'19%',
-                                        'vertical-align':'', 'margin':{'t':'75px', 'r':'5px'}}),
+                                        'vertical-align':'top', 'margin':{'t':'75px', 'r':'5px'}}),
                                 dcc.Graph(figure=tsnefig, 
                                       id='tsneplot', style={'display':'inline-block', 'width':'80%'}),
                                           
@@ -678,7 +678,7 @@ app.layout= html.Div(
                                      value = 'per_game',
                                         )]),
                 html.Div(
-                        [
+                        [ html.H3('Similar Players NBA Career Averages', style={'text-align':'center'}),
                                 table
                                 ], id='similar_table')
                             
