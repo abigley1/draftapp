@@ -902,7 +902,7 @@ def update_dotplot(player, data_type, col):
         data1 = [trace1, trace2, trace3, trace4]
     if data_type == 'Percentile':
         
-        layout = { 
+        layout = { "xaxis": {"title":"College Statsitic"},
               "yaxis": {"title": "Percentile"},
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
