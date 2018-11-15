@@ -657,7 +657,7 @@ app.layout= html.Div(
         
                             dcc.Graph(figure=dotfig,
                                       id='dotplot',
-                                      style=={'width':'80%', 'display':'inline-block', 'margin-bottom':'10px', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'},
+                                      style={'width':'80%', 'display':'inline-block', 'margin-bottom':'10px', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'},
                                       config={'displayModeBar': False}),    
                                 ], style={'display':'inlinle-block'}),
                 
