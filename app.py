@@ -625,7 +625,7 @@ app.layout= html.Div(
                                            
                                                 ], id='player summary')],
                                 style={'width':'19%', 'display':'inline-block', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'
-                                       , 'background-color':'#fafafa', 'margin-top':'8px', 'margin-right':'10px', 'vertical-align':'top',
+                                       , 'background-color':'#B35E3B', 'margin-top':'8px', 'margin-right':'10px', 'vertical-align':'top',
                                        'height':'450px', 'border-radius':'10px'} ),
                         html.Div(
                                 [   dcc.Graph(figure=survfig,
@@ -668,7 +668,7 @@ app.layout= html.Div(
                             html.Div(
                                     [
                                 html.Div(
-                                        [html_similar], id='similar', style={'display':'inline-block', 'width':'19%', 'vertical-align':'top', 'margin-right':'10px' ,'margin-top':'75px', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)',  'border-radius':'10px'}),
+                                        [html_similar], id='similar', style={'display':'inline-block', 'background-color':'#B35E3B', 'width':'19%', 'vertical-align':'top', 'margin-right':'10px' ,'margin-top':'75px', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)',  'border-radius':'10px'}),
                                 dcc.Graph(figure=tsnefig, 
                                       id='tsneplot', style={'display':'inline-block', 'width':'80%', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'}),
                                           
@@ -691,7 +691,7 @@ app.layout= html.Div(
                             
                 
                                     
-        ],  style = {'max-width':1250, 'margin':'auto'})
+        ],  style = {'max-width':1250, 'margin':'auto', 'background-color':'#253046', 'color':'#F8F3F1'})
     
 @app.callback(
         dash.dependencies.Output('player dropdown', 'options'),
