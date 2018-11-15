@@ -610,11 +610,11 @@ app.layout= html.Div([html.Div(
                                              options = playerOptions,
                                              value=player,
                                              searchable = True,
-                                              style={'color':'#253046')
+                                             
                                              
                                              ),
                                         
-                                ], style={'width':'49%', 'display':'inline-block'} )], ),
+                                ], style={'width':'49%', 'display':'inline-block', 'color':'#253046'} )], ),
                 html.Div(
                         [
                                 
