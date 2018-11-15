@@ -167,8 +167,8 @@ def nba_dot_plot(stats, player, col,  data_type='Percentile'):
         data1 = [trace1, trace2, trace3, trace4]
     if data_type == 'Percentile':
         
-        layout = {"xaxis": {"title":"College Statsitic", color='#253046'},
-              "yaxis": {"title": "Percentile Rank",color='#253046'},
+        layout = {"xaxis": {"title":"College Statsitic", 'color'='#253046'},
+              "yaxis": {"title": "Percentile Rank",'color'='#253046'},
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
               'barmode':'group',
@@ -176,8 +176,8 @@ def nba_dot_plot(stats, player, col,  data_type='Percentile'):
               'plot_bgcolor':'#F8F3F1'
                  }
     else:
-        layout = { "xaxis": {"title":"College Statsitic", color='#253046'},
-              "yaxis": {"title": "Count Per Game", color='#253046'}, 
+        layout = { "xaxis": {"title":"College Statsitic", 'color'='#253046'},
+              "yaxis": {"title": "Count Per Game", 'color'='#253046'}, 
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
               'barmode':'group',
@@ -216,8 +216,8 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
 
     data = [trace1, trace2]
     layout = go.Layout({ 
-          "xaxis": {"title": "Years in the NBA", color='#253046'}, 
-          "yaxis": {"title": "Probability of remaining in the NBA", color='#253046' },
+          "xaxis": {"title": "Years in the NBA", 'color'='#253046'}, 
+          "yaxis": {"title": "Probability of remaining in the NBA", 'color'='#253046' },
           'paper_bgcolor':'#F8F3F1',
            'plot_bgcolor':'#F8F3F1',
           'margin': {'t':50, 'r':30},
@@ -745,8 +745,8 @@ def get_surv_curv(player):
 
     data = [trace1, trace2]
     layout = go.Layout({
-          "xaxis": {"title": "Years in the NBA", color='#253046' }, 
-          "yaxis": {"title": "Probability of remaining in the NBA", color='#253046'},
+          "xaxis": {"title": "Years in the NBA", 'color'='#253046' }, 
+          "yaxis": {"title": "Probability of remaining in the NBA", 'color'='#253046'},
            'margin': {'t':50, 'r':30},
           'annotations':[{'x':13, 'y':0.78, 'text':string, 'showarrow':False, 'font':{'size':14}}],
           'legend':{'x':.8, 'y':1, 'traceorder':'normal'},
@@ -898,8 +898,8 @@ def update_dotplot(player, data_type, col):
         data1 = [trace1, trace2, trace3, trace4]
     if data_type == 'Percentile':
         
-        layout = { "xaxis": {"title":"College Statsitic", color='#253046'},
-              "yaxis": {"title": "Percentile", color='#253046'},
+        layout = { "xaxis": {"title":"College Statsitic", 'color'='#253046'},
+              "yaxis": {"title": "Percentile", 'color'='#253046'},
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
               'barmode':'group',
@@ -907,8 +907,8 @@ def update_dotplot(player, data_type, col):
               'plot_bgcolor':'#F8F3F1'
                  }
     else:
-        layout = { "xaxis": {"title":"College Statsitic", color='#253046'},
-              "yaxis": {"title": "Count per Game", color='#253046'},
+        layout = { "xaxis": {"title":"College Statsitic", 'color'='#253046'},
+              "yaxis": {"title": "Count per Game", 'color'='#253046'},
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
               'barmode':'group',
