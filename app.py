@@ -625,7 +625,7 @@ app.layout= html.Div([html.Div(
                                                 ], id='player summary')],
                                 style={'width':'19%', 'display':'inline-block', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'
                                        , 'background-color':'#B35E3B', 'margin-top':'8px', 'margin-right':'10px', 'vertical-align':'top',
-                                       'buffer-bottom':'8px', 'border-radius':'10px'} ),
+                                       'padding-bottom':'8px', 'border-radius':'10px'} ),
                         html.Div(
                                 [   dcc.Graph(figure=survfig,
                                               id='survcurv',
