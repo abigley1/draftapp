@@ -170,7 +170,7 @@ def nba_dot_plot(stats, player, col,  data_type='Percentile'):
         data1 = [trace1, trace2, trace3, trace4]
     if data_type == 'Percentile':
         
-        layout = { 
+        layout = {"xaxis": {"title":"College Statsitic"},
               "yaxis": {"title": "Percentile Rank"},
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
@@ -179,7 +179,7 @@ def nba_dot_plot(stats, player, col,  data_type='Percentile'):
               'plot_bgcolor':'#F3F2F4'
                  }
     else:
-        layout = { 
+        layout = { layout = { "xaxis": {"title":"College Statsitic"},
               "yaxis": {"title": "Count Per Game"}, 
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
@@ -909,7 +909,7 @@ def update_dotplot(player, data_type, col):
               'barmode':'group'
                  }
     else:
-        layout = { 
+        layout = { "xaxis": {"title":"College Statsitic"},
               "yaxis": {"title": "Count per Game"},
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
