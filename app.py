@@ -84,6 +84,7 @@ def nba_dot_plot(stats, player, col,  data_type='Percentile'):
     cols = col
     if data_type == 'Percentile':
         s = stats[cols].rank(pct=True).loc[player]
+        s=round(s,2)
         s = s*100
     else:
         s = stats[cols].loc[player]
@@ -291,7 +292,7 @@ def create_summary(player):
                                             style={'text-align':'center'}),
                                     html.Summary('Weight: ' + str(int(summ['Wght'])),
                                             style={'text-align':'center'}),
-                                    html.Summary('Wingspan: ' + str(summ['Wingspan']),
+                                    html.Summary('Wingspan: ' + str(round(summ['Wingspan'],2)),
                                             style={'text-align':'center'}),
                                     html.Summary('School: ' + str(summ['School']),
                                             style={'text-align':'center'}),
@@ -810,6 +811,7 @@ def update_dotplot(player, data_type, col):
     cols = col
     if data_type == 'Percentile':
         s = stats[cols].rank(pct=True).loc[player]
+        s=round(s,2)
         s = s*100
     else:
         s = stats[cols].loc[player]
