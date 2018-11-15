@@ -686,7 +686,7 @@ app.layout= html.Div([html.Div(
                 html.Div(
                         [ 
                                 table
-                                ], id='similar_table', style={'color':'#253046'})
+                                ], id='similar_table', style={'color':'#253046', 'background-color':'#F8F3F1'})
                             
                 
                                     
