@@ -593,7 +593,7 @@ app.layout= html.Div([html.Div(
                                 html.Div(
                                         [
                                             html.H3('Draft Class',
-                                        style={'text-align':'center', 'margin-top':'0px', 'margin-bottom':'0px'}),
+                                        style={'text-align':'center', 'margin-top':'0px', 'margin-bottom':'0px', 'color':'#F8F3F1'}),
                                        
                                         dcc.Dropdown(id='year dropdown',
                                              options = yearOptions,
@@ -603,7 +603,7 @@ app.layout= html.Div([html.Div(
                                 html.Div(
                                         [ 
                                             html.H3('Player Name',
-                                        style={'text-align':'center', 'margin-top':'0px', 'margin-bottom':'0px'}),
+                                        style={'text-align':'center', 'margin-top':'0px', 'margin-bottom':'0px', 'color':'#F8F3F1'}),
                                                     
                                 dcc.Dropdown(id='player dropdown',
                                              options = playerOptions,
