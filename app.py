@@ -668,7 +668,7 @@ app.layout= html.Div(
                             html.Div(
                                     [
                                 html.Div(
-                                        [html_similar], id='similar', style={'display':'inline-block', 'width':'19', 'vertical-align':'top', 'margin-right':'10px' ,'margin-top':'75px', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)',  'border-radius':'10px'}),
+                                        [html_similar], id='similar', style={'display':'inline-block', 'width':'19%', 'vertical-align':'top', 'margin-right':'10px' ,'margin-top':'75px', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)',  'border-radius':'10px'}),
                                 dcc.Graph(figure=tsnefig, 
                                       id='tsneplot', style={'display':'inline-block', 'width':'80%', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'}),
                                           
