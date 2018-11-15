@@ -713,8 +713,9 @@ def update_player_menu(year):
 
 @app.callback( ### how to get everything to update properly when I update year?
         dash.dependencies.Output('player summary', 'children'),
-        [dash.dependencies.Input('player dropdown', 'value')])
-def update_summary(player):
+        [dash.dependencies.Input('player dropdown', 'value'),
+        dash.dependencies.Input('year dropdown', 'value')])
+def update_summary(player, year,):
     new = create_summary(player)
     return new
 
