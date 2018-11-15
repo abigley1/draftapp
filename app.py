@@ -585,7 +585,7 @@ app.layout= html.Div([html.Div(
                 html.Div(#title
                         [
                         html.H1('NBA Survival Analysis',
-                        style={'text-align':'center', 'margin-top':'0px', 'margin-bottom':'0px'})],
+                        style={'text-align':'center', 'margin-top':'0px', 'margin-bottom':'0px', 'border-bottom-style':'solid','border-bottom-width':'thin'})],
                                             ),
                                 
                 html.Div(#drop downs
