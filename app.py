@@ -47,9 +47,7 @@ def make_tsne(data, inital_player):
         mode='markers',
         marker=dict(
             size=12,
-            line=dict(
                 color='#253046',
-                width=0.5
             )
 
         )
@@ -65,9 +63,7 @@ def make_tsne(data, inital_player):
         mode='markers',
         marker=dict(
             size=14,
-            line=dict(
                 color='#B35E3B',
-                width=0.5
             )
 
         )
@@ -776,9 +772,7 @@ def update_tsne(player):
         mode='markers',
         marker=dict(
             size=12,
-            line=dict(
-                color='#253046',
-                width=0.5
+            color='#253046'
             )
 
         )
@@ -793,9 +787,8 @@ def update_tsne(player):
         mode='markers',
         marker=dict(
             size=14,
-            line=dict(
                 color='#B35E3B',
-                width=0.5
+               
             )
 
         )
