@@ -803,7 +803,7 @@ def update_tsne(player):
     data1 = [trace1, trace2]
     layout = go.Layout({'hovermode':'closest', 
                         'margin':{'t':25, 'r':0},
-                       'legend':{'x':0, 'y':1},
+                       
                        'paper_bgcolor':'#F3F2F4',
                         'plot_bgcolor':'#F3F2F4'})
     fig = go.Figure(data = data1, layout=layout)
