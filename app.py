@@ -77,8 +77,8 @@ def make_tsne(data, inital_player):
     layout = go.Layout({'hovermode':'closest', 
                         'margin':{'t':0, 'r':0, 'l':0, 'b':0},
                         'legend':{'x':0, 'y':1},
-                       'paper_bgcolor':'#F3F2F4',
-                        'plot_bgcolor':'#F3F2F4'})
+                       'paper_bgcolor':'#F8F3F1',
+                       'plot_bgcolor':'#F8F3F1'})
     fig = go.Figure(data = data1, layout=layout)
     return fig
 
@@ -175,8 +175,8 @@ def nba_dot_plot(stats, player, col,  data_type='Percentile'):
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
               'barmode':'group',
-              'paper_bgcolor':'#F3F2F4',
-              'plot_bgcolor':'#F3F2F4'
+              'paper_bgcolor':'#F8F3F1',
+              'plot_bgcolor':'#F8F3F1'
                  }
     else:
         layout = { "xaxis": {"title":"College Statsitic"},
@@ -184,8 +184,8 @@ def nba_dot_plot(stats, player, col,  data_type='Percentile'):
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
               'barmode':'group',
-              'paper_bgcolor':'#F3F2F4',
-              'plot_bgcolor':'#F3F2F4'
+              'paper_bgcolor':'#F8F3F1',
+              'plot_bgcolor':'#F8F3F1'
                  }
 
     fig = go.Figure(data=data1, layout=layout )
@@ -220,7 +220,8 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
     layout = go.Layout({ 
           "xaxis": {"title": "Years in the NBA", }, 
           "yaxis": {"title": "Probability of remaining in the NBA"},
-          
+          'paper_bgcolor':'#F8F3F1',
+           'plot_bgcolor':'#F8F3F1',
           'margin': {'t':50, 'r':30},
           'annotations':[{'x':13, 'y':0.78, 'text':string, 'showarrow':False, 'font':{'size':14}}],
           'legend':{'x':.8, 'y':1, 'traceorder':'normal'} })
@@ -804,8 +805,8 @@ def update_tsne(player):
     layout = go.Layout({'hovermode':'closest', 
                         'margin':{'t':0, 'r':0, 'l':0, 'b':0},
                        'legend':{'x':0, 'y':1},
-                       'paper_bgcolor':'#F3F2F4',
-                        'plot_bgcolor':'#F3F2F4'})
+                       'paper_bgcolor':'#F8F3F1',
+                       'plot_bgcolor':'#F8F3F1'})
     fig = go.Figure(data = data1, layout=layout)
     return fig
     
@@ -906,14 +907,18 @@ def update_dotplot(player, data_type, col):
               "yaxis": {"title": "Percentile"},
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
-              'barmode':'group'
+              'barmode':'group',
+                  'paper_bgcolor':'#F8F3F1',
+              'plot_bgcolor':'#F8F3F1'
                  }
     else:
         layout = { "xaxis": {"title":"College Statsitic"},
               "yaxis": {"title": "Count per Game"},
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
-              'barmode':'group'
+              'barmode':'group',
+                  'paper_bgcolor':'#F8F3F1',
+              'plot_bgcolor':'#F8F3F1'
                  }
 
     fig = go.Figure(data=data1, layout=layout )
