@@ -277,7 +277,7 @@ def get_years(data):
         y.append(d)
     return y
 def create_summary(player):
-    player=player.replace('.', ''
+    player=player.replace('.', '')
     summ = get_player_sum(stats_for_summary, player)
     encoded_image = get_photo(player)
    
