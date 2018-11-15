@@ -48,7 +48,7 @@ def make_tsne(data, inital_player):
         marker=dict(
             size=12,
             line=dict(
-                color='#08519c',
+                color='#253046',
                 width=0.5
             )
 
@@ -208,7 +208,7 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
         name = 'League Average',
         x=league_surv.index,
         y=league_surv['baseline survival'].values,
-        marker = {'color':"#08519c"}
+        marker = {'color':"#253046"}
             )
     trace2 = go.Scatter(
         name = player,
@@ -737,7 +737,7 @@ def get_surv_curv(player):
         name = 'League Average',
         x=league_surv.index,
         y=league_surv['baseline survival'].values,
-        marker = {'color':"#08519c"}
+        marker = {'color':"#253046"}
             )
     trace2 = go.Scatter(
         name = player,
@@ -776,7 +776,7 @@ def update_tsne(player):
         marker=dict(
             size=12,
             line=dict(
-                color='#08519c',
+                color='#253046',
                 width=0.5
             )
 
