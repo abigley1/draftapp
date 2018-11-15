@@ -679,7 +679,7 @@ app.layout= html.Div(
                         ]
                         ),
                 html.Div(
-                        [html.H3('Similar Players NBA Career Averages', style={'text-align':'center'}),
+                        [
                                 dcc.RadioItems(id='sim data type',
                                      options = advancedOptionsSim,
                                      value = 'per_game',
