@@ -703,9 +703,11 @@ def update_players(year):
         [dash.dependencies.Input('year dropdown', 'value')])
 def update_player_menu(year):
     if counter == 0:
+        counter+=1
         return player
     else:
         players = get_players(stats, year)
+        counter+=1
         return players[0]
 
 
