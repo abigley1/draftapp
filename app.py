@@ -686,7 +686,7 @@ app.layout= html.Div([html.Div(
                 html.Div(
                         [ 
                                 table
-                                ], id='similar_table')
+                                ], id='similar_table', 'color':"#253046')
                             
                 
                                     
@@ -773,7 +773,7 @@ def update_tsne(player):
         mode='markers',
         marker=dict(
             size=12,
-            color='#84B6C8'
+            color='#1F77AA'
             
 
         )
