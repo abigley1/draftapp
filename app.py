@@ -531,7 +531,7 @@ stand = StandardScaler()
 scaled =stand.fit_transform(stats_for_surv)
 kn.fit(scaled)
 
-
+counter = 0
 
 stats_for_similar = stats_for_surv.copy()
 stats_for_similar.index = stats_for_similar.index.str.replace('.', '')
@@ -702,8 +702,11 @@ def update_players(year):
         dash.dependencies.Output('player dropdown', 'value'),
         [dash.dependencies.Input('year dropdown', 'value')])
 def update_player_menu(year):
-    players = get_players(stats, year)
-    return players[0]
+    if counter == 0:
+        return player
+    else:
+        players = get_players(stats, year)
+        return players[0]
 
 
 
