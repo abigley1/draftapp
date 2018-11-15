@@ -810,8 +810,9 @@ def update_tsne(player):
         dash.dependencies.Output('dotplot', 'figure'),
         [dash.dependencies.Input('player dropdown', 'value'),
          dash.dependencies.Input('data type', 'value'),
-         dash.dependencies.Input('col selector', 'value')])
-def update_dotplot(player, data_type, col):
+         dash.dependencies.Input('col selector', 'value'),
+        dash.dependencies.Input('year selector', 'value'])
+def update_dotplot(player, data_type, col, year):
     cols = col
     if data_type == 'Percentile':
         s = stats[cols].rank(pct=True).loc[player]
