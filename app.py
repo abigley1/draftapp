@@ -75,8 +75,10 @@ def make_tsne(data, inital_player):
 
     data1 = [trace1, trace2]
     layout = go.Layout({'hovermode':'closest', 
-                        'margin':{'t':0, 'r':0, 'l':0, 'b':0},
-                        'legend':{'x':0, 'y':1}})
+                        'margin':{'t':25, 'r':0},
+                        'legend':{'x':0, 'y':1},
+                       'paper_bgcolor':'#F3F2F4',
+                        'plot_bgcolor':'#F3F2F4'})
     fig = go.Figure(data = data1, layout=layout)
     return fig
 
@@ -172,14 +174,18 @@ def nba_dot_plot(stats, player, col,  data_type='Percentile'):
               "yaxis": {"title": "Percentile Rank"},
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
-              'barmode':'group'
+              'barmode':'group',
+              'paper_bgcolor':'#F3F2F4',
+              'plot_bgcolor':'#F3F2F4'
                  }
     else:
         layout = { 
               "yaxis": {"title": "Count Per Game"}, 
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
-              'barmode':'group'
+              'barmode':'group',
+              'paper_bgcolor':'#F3F2F4',
+              'plot_bgcolor':'#F3F2F4'
                  }
 
     fig = go.Figure(data=data1, layout=layout )
@@ -222,8 +228,6 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
     fig = go.Figure(data=data, layout=layout)
 
     
-
-    return fig
 
     
 
@@ -621,13 +625,13 @@ app.layout= html.Div(
                                            
                                                 ], id='player summary')],
                                 style={'width':'19%', 'display':'inline-block', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'
-                                       , 'background-color':'#fafafa', 'margin-top':'8px', 'margin-right':'5px', 'vertical-align':'top',
-                                       'height':'450px'} ),
+                                       , 'background-color':'#fafafa', 'margin-top':'8px', 'margin-right':'10px', 'vertical-align':'top',
+                                       'height':'450px', 'border-radius':'10px'} ),
                         html.Div(
                                 [   dcc.Graph(figure=survfig,
                                               id='survcurv',
                                       config={'displayModeBar': False}  )    
-                                        ], style={'width':'80%', 'display':'inline-block', 'margin-top':'8px'} , )]
+                                        ], style={'width':'80%', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)','display':'inline-block', 'margin-top':'8px', 'margin-bottom':'10px', 'border-radius':'10px'} , )]
                                 ),                 
                 
                 html.Div(
@@ -647,13 +651,13 @@ app.layout= html.Div(
                                              
                                              ),   
                                             ], style={'width':'19%', 'display':'inline-block',
-                                                    'vertical-align':'top', 'margin-top':'3%'}),
+                                                    'vertical-align':'top', 'margin-top':'3%','margin-right':'10px'}),
 
                             
         
                             dcc.Graph(figure=dotfig,
                                       id='dotplot',
-                                      style={'width':'80%', 'display':'inline-block', 'margin-top':'8px'},
+                                      style=={'width':'80%', 'display':'inline-block', 'margin-bottom':'10px', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'},
                                       config={'displayModeBar': False}),    
                                 ], style={'display':'inlinle-block'}),
                 
@@ -665,9 +669,9 @@ app.layout= html.Div(
                                     [
                                 html.Div(
                                         [html_similar], id='similar', style={'display':'inline-block', 'width':'19%',
-                                        'vertical-align':'top', 'margin':{'t':'75px', 'r':'5px'}}),
+                                        'vertical-align':'top', 'margin-right':'10px' ,'margin-top':'75px', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)',  'border-radius':'10px'}}),
                                 dcc.Graph(figure=tsnefig, 
-                                      id='tsneplot', style={'display':'inline-block', 'width':'80%'}),
+                                      id='tsneplot', style={'display':'inline-block', 'width':'80%', 'box-shadow':'1.5px 1.5px 5px 1px rgba(0,0,0,.2)'}),
                                           
                                 
                                
@@ -747,7 +751,9 @@ def get_surv_curv(player):
           "yaxis": {"title": "Probability of remaining in the NBA"},
            'margin': {'t':50, 'r':30},
           'annotations':[{'x':13, 'y':0.78, 'text':string, 'showarrow':False, 'font':{'size':14}}],
-          'legend':{'x':.8, 'y':1, 'traceorder':'normal'}
+          'legend':{'x':.8, 'y':1, 'traceorder':'normal'},
+           'paper_bgcolor':'#F3F2F4',
+          'plot_bgcolor':'#F3F2F4'
            
              })
     
@@ -797,8 +803,10 @@ def update_tsne(player):
 
     data1 = [trace1, trace2]
     layout = go.Layout({'hovermode':'closest', 
-                        'margin':{'t':0, 'r':0, 'l':0, 'b':0},
-                       'legend':{'x':0, 'y':1}})
+                        'margin':{'t':25, 'r':0},
+                       'legend':{'x':0, 'y':1},
+                       'paper_bgcolor':'#F3F2F4',
+                        'plot_bgcolor':'#F3F2F4'})
     fig = go.Figure(data = data1, layout=layout)
     return fig
     
