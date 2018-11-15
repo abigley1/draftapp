@@ -598,9 +598,8 @@ app.layout= html.Div([html.Div(
                                         dcc.Dropdown(id='year dropdown',
                                              options = yearOptions,
                                              value=year,
-                                             style={'color':'#253046'),                
-                                                        
-                                           ], style={'width':'49%','display':'inline-block'}),             
+                                             
+                                           ], style={'width':'49%','display':'inline-block','color':'#253046'}),             
                                 html.Div(
                                         [ 
                                             html.H3('Player Name',
