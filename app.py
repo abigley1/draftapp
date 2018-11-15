@@ -179,7 +179,7 @@ def nba_dot_plot(stats, player, col,  data_type='Percentile'):
               'plot_bgcolor':'#F3F2F4'
                  }
     else:
-        layout = { layout = { "xaxis": {"title":"College Statsitic"},
+        layout = { "xaxis": {"title":"College Statsitic"},
               "yaxis": {"title": "Count Per Game"}, 
               'margin': {'t':25, 'r':0},
               'hovermode':'closest',
