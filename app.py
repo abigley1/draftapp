@@ -221,7 +221,7 @@ def get_surv_curv(data, player):  ##add percentile of prediction as an annottion
           'paper_bgcolor':'#F8F3F1',
            'plot_bgcolor':'#F8F3F1',
           'margin': {'t':50, 'r':30},
-          'annotations':[{'x':13, 'y':0.78, 'text':string, 'showarrow':False, 'font':{'size':14}}],
+          'annotations':[{'x':13, 'y':0.78, 'text':string, 'showarrow':False, 'font':{'size':14, , 'color':'#253046'}}],
           'legend':{'x':.8, 'y':1, 'traceorder':'normal'} })
     
     fig = go.Figure(data=data, layout=layout)
