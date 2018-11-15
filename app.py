@@ -552,7 +552,7 @@ CORS(server)
 app.scripts.config.serve_locally = True
 app.css.config.serve_locally = False
 player = 'Stephen Curry'
-year = '2009'
+year = 2009
 yearOptions = get_years(stats)
 playerOptions = get_players(stats, int(year))
 
