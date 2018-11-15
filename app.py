@@ -581,7 +581,7 @@ table = create_nba_stats_table(similar, nba_stats, 'per_game')
 
 
 
-app.layout= html.Div(
+app.layout= html.Div([html.Div(
         [       
                 html.Div(#title
                         [
@@ -691,7 +691,7 @@ app.layout= html.Div(
                             
                 
                                     
-        ],  style = {'max-width':1250, 'margin':'auto', 'background-color':'#253046', 'color':'#F8F3F1'})
+        ],  style = {'max-width':1250, 'margin':'auto'})],  style={ 'background-color':'#253046', 'color':'#F8F3F1'}  )
     
 @app.callback(
         dash.dependencies.Output('player dropdown', 'options'),
