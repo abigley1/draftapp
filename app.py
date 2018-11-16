@@ -421,6 +421,12 @@ def create_nba_stats_table(similar, nba_stats, dtype):
             name1 = name1.split('-')[0]
         if name =='Al-Farouq Aminu':
             name1 = 'Al Farouq'
+        if name == 'Xavier Rathan-Mayes':
+            name1= 'Xavier Rathan'
+        if name=='Karl-Anthony Towns':
+            name1 = 'Karl Anthony'
+        if name=='Willie Cauley-Stein':
+            name1 = 'Willie Cauley'
         
         smaller_df = nba_stats.loc[name1] 
         if len(smaller_df) == 85:
