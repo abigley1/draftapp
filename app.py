@@ -466,6 +466,14 @@ def create_nba_stats_table(similar, nba_stats, dtype):
 
 
 stats = pd.read_csv('data/app_data.csv')
+
+
+stats['PlayerName'] = stats['PlayerName'].str.replace('.', '')
+stats['PlayerName'] = stats['PlayerName'].str.replace(', Jr.', '')
+stats['PlayerName'] = stats['PlayerName'].str.replace("'", '')
+stats['PlayerName'] = stats['PlayerName'].str.replace(' Jr', '')
+stats['PlayerName'] = stats['PlayerName'].str.replace(' IV', '')
+stats['PlayerName'] = stats['PlayerName'].str.replace(',', '')
 stats1 = stats.copy()
 stats1['PlayerName'] = stats1['PlayerName'].str.replace('.', '')
 stats= stats.set_index(['PlayerName', 'Full Year'])
