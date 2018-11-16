@@ -415,7 +415,7 @@ def create_nba_stats_table(similar, nba_stats, dtype):
         name = name.replace('.', '')
         name = name.replace("'", '')
         name = name.replace(' Jr', '')
-        name = name.replace(' IV', ''
+        name = name.replace(' IV', '')
         name1=name
         if name == 'Darius Johnson Odom': #deal with werid name cuts
             name1 = name1.split('-')[0]
