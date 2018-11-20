@@ -509,7 +509,7 @@ drop = ['Player Link', 'Adjusted BPM',
        'Total S %', 'PPR', 'PPS', 'ORtg', 'DRtg', 'PER',
        'Wingspan', 'Pos', 'Hght\n(inches)', 'Wght',
        'RSCI Rank', 'RealGM Link', 'NCAA Seasons\n(D-I)', 'Hgt', 'Birthday (date format)']
-col_touse = ['NBA_Experience', 'active','OWS', 'Ast/TO', 'TOV%', 'TS%', 'STL%', 'TRB%'] 
+col_touse = ['NBA_Experience', 'active','OWS', 'DWS', 'Ast/TO', 'TOV%', 'TS%', 'STL%', 'TRB%'] 
 
 cols_for_sim = [ 'FGA/3A','TS%', 'AST%', 'ORB%', 'DRB%', 'STL%', 'BLK%', 'TOV%', 'USG%', 'Hght\n(inches)', 'Wingspan', 'Wght']
 
