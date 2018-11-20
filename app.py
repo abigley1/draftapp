@@ -404,7 +404,7 @@ def create_nba_stats_table(similar, nba_stats, dtype):
     placeholder.index = placeholder.index.str.replace('.', '')
     placeholder.index = placeholder.index.str.replace("'", '')
     placeholder.index = placeholder.index.str.replace(' Jr', '')
-    placeholder= placeholder[~placeholder.index.duplicated(keep='first')]
+    placeholder= placeholder[~placeholder.index.duplicated(keep='last')]
     placeholder = placeholder[non_avg_col]
     
     df = pd.DataFrame()
@@ -495,8 +495,8 @@ nba_stats = pd.read_excel('data/NBARealGM.xlsx', header=1)
 
 stats_for_summary = stats.copy()
 stats_for_summary.index =stats_for_summary.index.droplevel(1)
-stats_for_summary= stats_for_summary[~stats_for_summary.index.duplicated(keep='first')]
-stats= stats[~stats.index.duplicated(keep='first')]
+stats_for_summary= stats_for_summary[~stats_for_summary.index.duplicated(keep='last')]
+stats= stats[~stats.index.duplicated(keep='last')]
 drop = ['Player Link', 'Adjusted BPM',
        'Estimated OBPM\n(Calculated BPM - Regressed DBPM)',
        'Estimated DBPM\n(@OdeToOden\nRegression)',
@@ -520,7 +520,7 @@ stats_for_tsne = stats_for_surv.drop(['NBA_Experience', 'active'], axis=1)
 
 
 stats_for_similar = stats1.copy()
-stats_for_similar= stats_for_similar[~stats_for_similar.index.duplicated(keep='first')]
+stats_for_similar= stats_for_similar[~stats_for_similar.index.duplicated(keep='last')]
 stats_for_similar['FGA/3A'] = stats_for_similar['FGA']/stats_for_similar['3PA']
 
 stats_for_similar = stats_for_similar[cols_for_sim]
