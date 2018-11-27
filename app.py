@@ -603,6 +603,10 @@ app.layout= html.Div([html.Div(
                         html.H1('NBA Survival Analysis',
                         style={'text-align':'center', 'margin-top':'0px', 'margin-bottom':'0px', 'border-bottom-style':'solid','border-bottom-width':'thin'})],
                                             ),
+                html.Div(
+                    [
+                        html.H2( html.A('About These Predictions', href='https://medium.com/@andrewbigley/introduction-ab28092ce09', target='_blank')
+                                style={'text-align':'center'})]),
                                 
                 html.Div(#drop downs
                         [
