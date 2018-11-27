@@ -605,7 +605,7 @@ app.layout= html.Div([html.Div(
                                             ),
                 html.Div(
                     [
-                        html.H2( html.A('About These Predictions', href='https://medium.com/@andrewbigley/introduction-ab28092ce09', target='_blank',
+                        html.H2( html.A('About These Predictions', href='https://medium.com/@andrewbigley/introduction-ab28092ce09', target='_blank'),
                                 style={'text-align':'center'})]),
                                 
                 html.Div(#drop downs
